@@ -41,5 +41,7 @@ void *check_subgrid(void *param);
 
 void print_board (void);
 void load_board  (int src[SIZE][SIZE]);
+int  read_board_from_file(const char *filename);
+void print_results       (void);
 
 #endif /* SUDOKU_H */
