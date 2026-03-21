@@ -57,7 +57,7 @@ int main(void)
     for (int i = 0; i < SIZE; i++) {
         /* TODO: thay ??? bằng giá trị đúng */
         pthread_create(&threads[t], NULL, check_row,
-                       make_param(/* ??? */, 0, t));
+                       make_param(i, 0, t));
         t++;
     }
 
@@ -65,7 +65,7 @@ int main(void)
     for (int j = 0; j < SIZE; j++) {
         /* TODO: thay ??? bằng giá trị đúng */
         pthread_create(&threads[t], NULL, check_col,
-                       make_param(0, /* ??? */, t));
+                       make_param(0, j, t));
         t++;
     }
 
@@ -80,7 +80,7 @@ int main(void)
         for (int j = 0; j < SIZE; j += 3) {
             /* TODO: thay ??? bằng giá trị đúng */
             pthread_create(&threads[t], NULL, check_subgrid,
-                           make_param(/* ??? */, /* ??? */, t));
+                           make_param(i, j, t));
             t++;
         }
     }
