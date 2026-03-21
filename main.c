@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     {
         /* TODO: thay ??? bằng giá trị đúng */
         pthread_create(&threads[t], NULL, check_row,
-                       make_param(/* ??? */, 0, t));
+                       make_param(i, 0, t));
         t++;
     }
 
@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
     {
         /* TODO: thay ??? bằng giá trị đúng */
         pthread_create(&threads[t], NULL, check_col,
-                       make_param(0, /* ??? */, t));
+                       make_param(0, j, t));
         t++;
     }
 
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
         {
             /* TODO: thay ??? bằng giá trị đúng */
             pthread_create(&threads[t], NULL, check_subgrid,
-                           make_param(/* ??? */, /* ??? */, t));
+                           make_param(i, j, t));
             t++;
         }
     }

@@ -22,22 +22,29 @@
 
 void *check_row(void *param)
 {
-    parameters *p   = (parameters *) param;
-    int         row = p->row;
-    int         idx = p->index;
+    parameters *p = (parameters *)param;
+    int row = p->row;
+    int idx = p->index;
     free(param);
 
     int seen[SIZE + 1];
 
-    /* TODO: khởi tạo seen[] về 0 */
+    /// khởi tạo seen
+    for (int k = 0; k <= SIZE; k++)
+        seen[k] = 0;
 
-    /* TODO: loop j = 0..SIZE-1
-     *   int num = sudoku[row][j];
-     *   if (num < 1 || num > 9 || seen[num]) → result[idx]=0, exit
-     *   seen[num] = 1;
-     */
-
-    result[idx] = 0; /* TODO: đổi thành 1 khi pass hết vòng lặp */
+    // check
+    for (int j = 0; j < SIZE; j++)
+    {
+        int num = sudoku[row][j];
+        if (num < 1 || num > SIZE || seen[num])
+        {
+            result[idx] = 0;
+            pthread_exit(NULL);
+        }
+        seen[num] = 1;
+    }
+    result[idx] = 1;
     pthread_exit(NULL);
 }
 
@@ -48,21 +55,27 @@ void *check_row(void *param)
 
 void *check_col(void *param)
 {
-    parameters *p   = (parameters *) param;
-    int         col = p->col;
-    int         idx = p->index;
+    parameters *p = (parameters *)param;
+    int col = p->col;
+    int idx = p->index;
     free(param);
 
     int seen[SIZE + 1];
 
-    /* TODO: khởi tạo seen[] về 0 */
+    for (int k = 0; k <= SIZE; k++)
+        seen[k] = 0;
 
-    /* TODO: loop i = 0..SIZE-1
-     *   int num = sudoku[i][col];   ← đảo i/j so với check_row
-     *   check seen, mark seen
-     */
-
-    result[idx] = 0; /* TODO */
+    for (int i = 0; i < SIZE; i++)
+    {
+        int num = sudoku[i][col];
+        if (num < 1 || num > SIZE || seen[num])
+        {
+            result[idx] = 0;
+            pthread_exit(NULL);
+        }
+        seen[num] = 1;
+    }
+    result[idx] = 1;
     pthread_exit(NULL);
 }
 
@@ -73,22 +86,30 @@ void *check_col(void *param)
 
 void *check_subgrid(void *param)
 {
-    parameters *p      = (parameters *) param;
-    int         startR = p->row;
-    int         startC = p->col;
-    int         idx    = p->index;
+    parameters *p = (parameters *)param;
+    int startR = p->row;
+    int startC = p->col;
+    int idx = p->index;
     free(param);
 
     int seen[SIZE + 1];
 
-    /* TODO: khởi tạo seen[] về 0 */
+    for (int k = 0; k <= SIZE; k++)
+        seen[k] = 0;
 
-    /* TODO: loop i = startR .. startR+2
-     *         loop j = startC .. startC+2
-     *           int num = sudoku[i][j];
-     *           check seen, mark seen
-     */
-
-    result[idx] = 0; /* TODO */
+    for (int i = startR; i < startR + 3; i++)
+    {
+        for (int j = startC; j < startC + 3; j++)
+        {
+            int num = sudoku[i][j];
+            if (num < 1 || num > SIZE || seen[num])
+            {
+                result[idx] = 0;
+                pthread_exit(NULL);
+            }
+            seen[num] = 1;
+        }
+    }
+    result[idx] = 1;
     pthread_exit(NULL);
 }
