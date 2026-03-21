@@ -95,16 +95,6 @@ int main(int argc, char *argv[])
         pthread_join(threads[i], NULL);
 
     /* ── PRINT RESULT ──────────────────────────────────── */
-    int valid = 1;
-    for (int i = 0; i < NUM_THREADS; i++)
-    {
-        if (result[i] == 0)
-        {
-            valid = 0;
-            break;
-        }
-    }
-
     print_results(); // in từng thread PASS/FAIL
 
     int valid = 1;
