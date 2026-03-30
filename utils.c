@@ -1,10 +1,5 @@
 /*
  * utils.c
- * Các hàm tiện ích:
- *   - print_board()         : in bảng sudoku ra màn hình
- *   - load_board()          : copy từ mảng 2D vào sudoku[][]
- *   - read_board_from_file(): đọc puzzle từ file CSV
- *   - print_results()       : in ra thread nào PASS / FAIL
  */
 
 #include <stdio.h>
@@ -32,7 +27,6 @@ void print_board(void)
 
 /* ─────────────────────────────────────────
    load_board
-   Copy từ mảng 2D bên ngoài vào sudoku[][].
    ───────────────────────────────────────── */
 
 void load_board(int src[SIZE][SIZE])
@@ -44,13 +38,6 @@ void load_board(int src[SIZE][SIZE])
 
 /* ─────────────────────────────────────────
    read_board_from_file
-   Đọc puzzle từ file CSV, format:
-       6,2,4,5,3,9,1,8,7
-       5,1,9,7,2,8,6,3,4
-       ...  (9 dòng, mỗi dòng 9 số cách nhau bằng dấu phẩy)
-
-   Trả về:  0 nếu thành công
-           -1 nếu lỗi
    ───────────────────────────────────────── */
 
 int read_board_from_file(const char *filename)
@@ -69,10 +56,8 @@ int read_board_from_file(const char *filename)
                 fclose(fp);
                 return -1;
             }
-            /* bỏ qua dấu phẩy hoặc newline giữa các số */
             char ch;
             if (fscanf(fp, "%c", &ch) == 1) {
-                /* ký tự separator — fscanf tự xử lý lần sau */
                 (void)ch;
             }
         }
@@ -84,8 +69,6 @@ int read_board_from_file(const char *filename)
 
 /* ─────────────────────────────────────────
    print_results
-   In ra từng thread PASS hay FAIL kèm mô tả vùng.
-   Gọi sau khi đã pthread_join() tất cả.
    ───────────────────────────────────────── */
 
 void print_results(void)

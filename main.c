@@ -1,7 +1,5 @@
 /*
  * main.c
- * Khởi tạo 27 threads, join, in kết quả.
- *
  * Compile:  make
  * Run:      ./sudoku
  */
@@ -57,7 +55,6 @@ int main(int argc, char *argv[])
     /* ── ROW THREADS  (t = 0..8) ──────────────────────── */
     for (int i = 0; i < SIZE; i++)
     {
-        /* TODO: thay ??? bằng giá trị đúng */
         pthread_create(&threads[t], NULL, check_row,
                        make_param(i, 0, t));
         t++;
@@ -66,7 +63,6 @@ int main(int argc, char *argv[])
     /* ── COLUMN THREADS  (t = 9..17) ──────────────────── */
     for (int j = 0; j < SIZE; j++)
     {
-        /* TODO: thay ??? bằng giá trị đúng */
         pthread_create(&threads[t], NULL, check_col,
                        make_param(0, j, t));
         t++;
@@ -83,7 +79,6 @@ int main(int argc, char *argv[])
     {
         for (int j = 0; j < SIZE; j += 3)
         {
-            /* TODO: thay ??? bằng giá trị đúng */
             pthread_create(&threads[t], NULL, check_subgrid,
                            make_param(i, j, t));
             t++;
@@ -95,7 +90,7 @@ int main(int argc, char *argv[])
         pthread_join(threads[i], NULL);
 
     /* ── PRINT RESULT ──────────────────────────────────── */
-    print_results(); // in từng thread PASS/FAIL
+    print_results();
 
     int valid = 1;
     for (int i = 0; i < NUM_THREADS; i++)

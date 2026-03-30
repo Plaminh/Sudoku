@@ -1,14 +1,5 @@
 /*
  * threads.c
- * Ba hàm chạy trong thread: check_row, check_col, check_subgrid.
- * Logic check giống nhau — chỉ khác cách duyệt mảng sudoku[][].
- *
- * Pattern chung:
- *   1. Khởi tạo seen[SIZE+1] = {0}
- *   2. Lặp qua 9 ô của vùng cần check
- *   3. Nếu num ngoài [1,9] hoặc seen[num] đã bật → invalid
- *   4. Đánh dấu seen[num] = 1
- *   5. Qua hết vòng lặp → valid
  */
 
 #include <stdlib.h>
@@ -17,7 +8,6 @@
 
 /* ─────────────────────────────────────────
    check_row
-   Kiểm tra hàng p->row chứa đủ 1–9, không trùng.
    ───────────────────────────────────────── */
 
 void *check_row(void *param)
@@ -50,7 +40,6 @@ void *check_row(void *param)
 
 /* ─────────────────────────────────────────
    check_col
-   Kiểm tra cột p->col chứa đủ 1–9, không trùng.
    ───────────────────────────────────────── */
 
 void *check_col(void *param)
@@ -81,7 +70,6 @@ void *check_col(void *param)
 
 /* ─────────────────────────────────────────
    check_subgrid
-   Kiểm tra ô 3×3 có góc trên-trái là (p->row, p->col).
    ───────────────────────────────────────── */
 
 void *check_subgrid(void *param)
